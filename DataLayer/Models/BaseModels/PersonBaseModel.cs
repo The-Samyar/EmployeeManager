@@ -14,6 +14,5 @@ namespace DataLayer.Models.BaseModels
         [EmailAddress]
         public string Email { get; set; }
         public DateTime Dob { get; set; }
-
     }
 }
