@@ -9,8 +9,14 @@ namespace DataLayer.Models.BaseModels
 {
     public abstract class BaseModel
     {
-        public DateTime CreatedAt { get; } = DateTime.Now;
+        public DateTime CreatedAt { get; }
         public DateTime EditedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
+        public bool IsDeleted { get; set; }
+
+        public BaseModel()
+        {
+            CreatedAt = DateTime.Now;
+            IsDeleted = false;
+        }
     }
 }

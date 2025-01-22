@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Models
 {
-    public class Employee:PersonBaseModel
+    public class Employee: PersonBaseModel
     {
         [Key]
         public int EmployeeId { get; set; }
         public DateTime HiringDate { get; set; }
-        public int UserId { get; set; }
-        public virtual User User { get; set; }
 
+        [ForeignKey(nameof(Manager))]
+        public int ManagerId { get; set; }
+        public virtual Manager Manager { get; set; }
+
+        [ForeignKey(nameof(Position))]
         public int PositionId { get; set; }
         public virtual Position Position { get; set; }
-
-        public int EmployerId { get; set; }
-        public virtual Employer Employer { get; set; }
     }
 }

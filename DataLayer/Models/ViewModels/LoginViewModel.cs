@@ -1,14 +1,13 @@
-﻿using DataLayer.Models.BaseModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer.Models.BindingModels
+namespace DataLayer.Models.ViewModels
 {
-    public class LoginBindingModel
+    public class LoginViewModel
     {
         [Required]
         public string Username { get; set; }
