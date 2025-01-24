@@ -9,10 +9,16 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Models
 {
-    public class Manager: PersonBaseModel
+    public class User: BaseModel
     {
         [Key]
-        public int ManagerId { get; set; }
+        public int UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public bool IsManager { get; set; }
+
         public virtual List<Employee> Employees { get; set; }
     }
 }

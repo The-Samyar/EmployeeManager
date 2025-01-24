@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Models.ViewModels
 {
-    public class LoginViewModel
+    public class CreateManagerViewModel
     {
         [Required(ErrorMessage = "Username is required.")]
         [DisplayName("Username")]
@@ -17,5 +17,16 @@ namespace DataLayer.Models.ViewModels
         [Required(ErrorMessage = "Password is required.")]
         [DisplayName("Password")]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Password repeat is required.")]
+        [Compare("Password", ErrorMessage = "Passwords do not match.")]
+        [DisplayName("Repeat Password")]
+        public string PasswordRepeat { get; set; }
+
+        [DisplayName("First Name")]
+        public string FirstName { get; set; }
+
+        [DisplayName("Last Name")]
+        public string LastName { get; set; }
     }
 }

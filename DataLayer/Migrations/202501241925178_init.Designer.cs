@@ -7,13 +7,13 @@ namespace DataLayer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class renameRewardAmountPerUnittoRewardRate : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(renameRewardAmountPerUnittoRewardRate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "202501220929055_rename-RewardAmountPerUnit-to-RewardRate"; }
+            get { return "202501241925178_init"; }
         }
         
         string IMigrationMetadata.Source

@@ -7,13 +7,13 @@ namespace DataLayer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class inheritbasemodel : IMigrationMetadata
+    public sealed partial class addrewardcount : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(inheritbasemodel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addrewardcount));
         
         string IMigrationMetadata.Id
         {
-            get { return "202501221213280_inherit-base-model"; }
+            get { return "202501241941516_add-reward-count"; }
         }
         
         string IMigrationMetadata.Source
