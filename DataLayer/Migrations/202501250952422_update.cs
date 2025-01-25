@@ -3,16 +3,14 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addrewardcount : DbMigration
+    public partial class update : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Employees", "RewardCount", c => c.Int(nullable: false));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Employees", "RewardCount");
         }
     }
 }

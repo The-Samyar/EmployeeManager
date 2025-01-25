@@ -14,15 +14,10 @@ namespace DataLayer.Models
         [Key]
         public int EmployeeId { get; set; }
         public DateTime HiringDate { get; set; }
-        public int RewardCount { get; set; }
 
         [ForeignKey(nameof(User))]
         public int UserId { get; set; }
         public virtual User User { get; set; }
-
-        [ForeignKey(nameof(Manager))]
-        public int ManagerId { get; set; }
-        public virtual User Manager { get; set; }
 
         [ForeignKey(nameof(Position))]
         public int PositionId { get; set; }

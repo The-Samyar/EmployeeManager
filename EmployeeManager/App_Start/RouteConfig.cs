@@ -21,14 +21,14 @@ namespace EmployeeManager
             
             routes.MapRoute(
                 name: "Manager",
-                url: "manager/{action}/",
+                url: "manager/",
                 defaults: new { controller = "Manager", action = "Home" }
             );
             
             routes.MapRoute(
                 name: "Employee",
-                url: "Employee/",
-                defaults: new { controller = "Manager", action = "Home" }
+                url: "employee/",
+                defaults: new { controller = "Employee", action = "Home" }
             );
 
             routes.MapRoute(

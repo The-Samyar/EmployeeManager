@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DataLayer.Context;
+using DataLayer.Models.ViewModels;
 
 namespace EmployeeManager.Controllers
 {
@@ -15,8 +16,26 @@ namespace EmployeeManager.Controllers
         [Authorize]
         public ActionResult Home()
         {
-            var employee = db.Employees.Where(e => e.User.Username == User.Identity.Name).FirstOrDefault();
-            return View(employee);
+            var employee = db.Employees.Where(u => u.User.Username == User.Identity.Name).FirstOrDefault();
+
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (employee.User.IsManager)
+            {
+                return HttpNotFound();
+            }
+
+            var rewards = db.RewardHistorys.Where(u => u.EmployeeId == employee.EmployeeId).ToList();
+            var data = new EmployeeHomeViewModel
+            {
+                Employee = employee,
+                Rewards = rewards,
+            };
+
+            return View(data);
         }
     }
 }

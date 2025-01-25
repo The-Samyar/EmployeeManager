@@ -7,13 +7,13 @@ namespace DataLayer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class init : IMigrationMetadata
+    public sealed partial class addrewardhistory : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addrewardhistory));
         
         string IMigrationMetadata.Id
         {
-            get { return "202501241925178_init"; }
+            get { return "202501250634491_add-reward-history"; }
         }
         
         string IMigrationMetadata.Source

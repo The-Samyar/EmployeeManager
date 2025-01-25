@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataLayer.Models.BaseModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,12 +9,11 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Models
 {
-    public class Position
+    public class Position: BaseModel
     {
         [Key]
         public int PositionId { get; set; }
         public string Title { get; set; }
-        public float RewardRate { get; set; }
-        public ICollection<Employee> Employees { get; internal set; }
+        public double RewardRate { get; set; }
     }
 }

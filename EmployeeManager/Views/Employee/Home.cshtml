@@ -1,19 +1,12 @@
 ﻿
 @{
     ViewBag.Title = "Home";
-    var totalReward = Model.RewardCount * Model.Position.RewardRate;
 }
-@model DataLayer.Models.Employee
 
-<h2>Home</h2>
+@model DataLayer.Models.ViewModels.EmployeeHomeViewModel
 
-<div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex items-center justify-between mb-4">
-        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Customers</h5>
-        <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-            View all
-        </a>
-    </div>
+<div class="max-w-sm mx-auto">
+    <h5 class="inline-block mb-2 text-xl font-bold text-gray-900 dark:text-white">Employee details</h5>
     <div class="flow-root">
         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
             <li class="py-3 sm:py-4">
@@ -24,42 +17,87 @@
                         </p>
                     </div>
                     <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        @Model.User.FirstName @Model.User.LastName
+                        @Model.Employee.User.FirstName @Model.Employee.User.LastName
                     </div>
+                </div>
+            </li>
+            <li class="py-3 sm:py-4">
+                <div class="flex items-center">
                     <div class="flex-1 min-w-0 ms-4">
                         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                             Username:
                         </p>
                     </div>
                     <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        @Model.User.Username
+                        @Model.Employee.User.Username
                     </div>
-                    <div class="flex-1 min-w-0 ms-4">
-                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            Manager:
-                        </p>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        @Model.Manager.FirstName @Model.Manager.LastName
-                    </div>
+                </div>
+            </li>
+            <li class="py-3 sm:py-4">
+                <div class="flex items-center">
                     <div class="flex-1 min-w-0 ms-4">
                         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                             Position title:
                         </p>
                     </div>
                     <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        @Model.Position.Title
-                    </div>
-                    <div class="flex-1 min-w-0 ms-4">
-                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            Reward amount:
-                        </p>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        @totalReward
+                        @Model.Employee.Position.Title
                     </div>
                 </div>
             </li>
         </ul>
+
+
+        <div class="mt-4 relative overflow-x-auto">
+            <h5 class="inline-block mb-2 text-xl font-bold text-gray-900 dark:text-white">Rewards</h5>
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Date
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Rate
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Count
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Total
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var reward in Model.Rewards)
+                        {
+                            var total = reward.Count * reward.Rate;
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    @reward.CreatedAt
+                                </th>
+                                <td class="px-6 py-4">
+                                    @reward.Rate
+                                </td>
+                                <td class="px-6 py-4">
+                                    @reward.Count
+                                </td>
+                                <td class="px-6 py-4">
+                                    @total
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
+    <div class="flex justify-center">
+        <form action="/auth/signout" method="GET">
+            <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Sign Out
+            </button>
+        </form>
+    </div>
+
 </div>

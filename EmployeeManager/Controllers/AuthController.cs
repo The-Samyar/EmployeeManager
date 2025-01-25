@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using DataLayer.Models;
 using System.Web.Security;
+using System.Security.Claims;
 
 namespace EmployeeManager.Controllers
 {
@@ -25,17 +26,17 @@ namespace EmployeeManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                Employee res = db.Employees.Where(e => e.User.Username == LoginCredentials.Username && e.User.Password == LoginCredentials.Password).FirstOrDefault();
+                var res = db.Users.Where(e => e.Username == LoginCredentials.Username && e.Password == LoginCredentials.Password).FirstOrDefault();
                 if (res != null)
                 {
                     FormsAuthentication.SetAuthCookie(LoginCredentials.Username, true);
-                    if (res.User.IsManager)
+                    if (res.IsManager)
                     {
-                        return RedirectToRoute("manager/");
+                        return RedirectToRoute("Manager");
                     }
                     else
                     {
-                        return RedirectToRoute("employee/");
+                        return RedirectToRoute("Employee");
                     }
                 }
             }

@@ -2,17 +2,11 @@
 @{
     ViewBag.Title = "Home";
 }
-@model DataLayer.Models.User
-<h2>Home</h2>
 
+@model DataLayer.Models.ViewModels.ManagerHomeViewModel
 
-<div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex items-center justify-between mb-4">
-        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Customers</h5>
-        <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-            View all
-        </a>
-    </div>
+<div class="max-w-sm mx-auto">
+    <h5 class="inline-block mb-2 text-xl font-bold text-gray-900 dark:text-white">Manager details</h5>
     <div class="flow-root">
         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
             <li class="py-3 sm:py-4">
@@ -23,18 +17,84 @@
                         </p>
                     </div>
                     <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        @Model.FirstName @Model.LastName
+                        @Model.Manager.FirstName @Model.Manager.LastName
                     </div>
+                </div>
+            </li>
+            <li class="py-3 sm:py-4">
+                <div class="flex items-center">
                     <div class="flex-1 min-w-0 ms-4">
                         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                             Username:
                         </p>
                     </div>
                     <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        @Model.Username
+                        @Model.Manager.Username
                     </div>
                 </div>
             </li>
         </ul>
+
+
+        <div class="mt-4 relative overflow-x-auto">
+            <h5 class="inline-block mb-2 text-xl font-bold text-gray-900 dark:text-white">Rewards</h5>
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Full name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Hiring date
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Position
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var employee in Model.Employees)
+                        {
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                <td class="px-6 py-4">
+                                    @employee.User.FirstName @employee.User.LastName
+                                </td>
+                                <td class="px-6 py-4">
+                                    @employee.HiringDate
+                                </td>
+                                <td class="px-6 py-4">
+                                    @employee.Position.Title
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="/manager/give-reward/" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-yellow-600 border border-transparent rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">Reward</a>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                        Edit
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
+    <div class="flex justify-center">
+        <form action="/auth/signout" method="GET">
+            <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Sign Out
+            </button>
+            <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                New employee
+            </button>
+        </form>
+    </div>
+
 </div>

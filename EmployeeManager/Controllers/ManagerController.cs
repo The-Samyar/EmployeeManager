@@ -18,9 +18,22 @@ namespace EmployeeManager.Controllers
         [Authorize]
         public ActionResult Home()
         {
-            var user = db.Users.Where(u => u.Username == User.Identity.Name).FirstOrDefault();
+            var manager = db.Users.Where(u => u.Username == User.Identity.Name).FirstOrDefault();
+            if (manager == null) {
+                return View(HttpNotFound());
+            }
 
-            return View(user);
+            if (!manager.IsManager)
+            {
+                return View(HttpNotFound());
+            }
+            var employees = db.Employees.ToList();
+            var data = new ManagerHomeViewModel
+            {
+                Manager = manager,
+                Employees = employees
+            };
+            return View(data);
         }
 
         // Update

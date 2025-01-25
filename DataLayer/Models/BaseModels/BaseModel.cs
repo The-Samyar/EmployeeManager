@@ -10,7 +10,7 @@ namespace DataLayer.Models.BaseModels
     public abstract class BaseModel
     {
         public DateTime CreatedAt { get; set; }
-        public DateTime EditedAt { get; set; }
+        public DateTime EditedAt { get; set; }  
         public bool IsDeleted { get; set; }
 
         public BaseModel()
