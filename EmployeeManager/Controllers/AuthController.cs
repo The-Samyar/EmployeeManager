@@ -73,7 +73,6 @@ namespace EmployeeManager.Controllers
                 db.Users.Add(manager);
                 db.SaveChanges();
             }
-
             return RedirectToAction("Create");
         }
 

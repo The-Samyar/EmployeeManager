@@ -115,11 +115,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\Manager\Create.cshtml" />
     <Content Include="Views\Manager\Home.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Employee\Home.cshtml" />
-    <Content Include="Views\Auth\Signup.cshtml" />
+    <Content Include="Views\Manager\CreateEmployee.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
