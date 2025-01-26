@@ -56,6 +56,9 @@
                         <th scope="col" class="px-6 py-3">
                             Latest reward date
                         </th>
+                        <th scope="col" colspan="4" class="px-6 py-3">
+                            Operation
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,16 +98,12 @@
                                                 }
                                             }
 
-                                            <td class="px-6 py-4">
-                                                <a href="/manager/AddReward?empId=@row.Employee.EmployeeId" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-yellow-300 border border-transparent rounded-md hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-200">Reward</a>
-                                            </td>
+                                            <td class="">
+                                                <a href="/manager/AddReward?empId=@row.Employee.EmployeeId" class="inline items-center px-4 py-2 text-sm font-medium text-white bg-yellow-300 border border-transparent rounded-md hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-200">Reward</a>
 
-                                            <td class="px-6 py-4">
-                                                <a href="/manager/EditEmployee?empId=@row.Employee.EmployeeId" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-300 border border-transparent rounded-md hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-200">Edit</a>
-                                            </td>
+                                                <a href="/manager/EditEmployee?empId=@row.Employee.EmployeeId" class="inline items-center px-4 py-2 text-sm font-medium text-white bg-green-300 border border-transparent rounded-md hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-200">Edit</a>
 
-                                            <td class="px-6 py-4">
-                                                <a href="/manager/DeleteEmployee/@row.Employee.EmployeeId" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete</a>
+                                                <a href="/manager/DeleteEmployee/@row.Employee.EmployeeId" class="inline items-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete</a>
                                             </td>
                                         </tr>
                         }
