@@ -1,9 +1,10 @@
-﻿using DataLayer.Context;
-using DataLayer.Models;
-using DataLayer.Models.ViewModels;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using DataLayer.Context;
+using DataLayer.Models;
+using DataLayer.Models.ViewModels;
 
 namespace EmployeeManager.Controllers
 {
@@ -156,7 +157,7 @@ namespace EmployeeManager.Controllers
 
         public ActionResult AddReward(int empId)
         {
-            var employee = db.Employees.FirstOrDefault(x=>x.EmployeeId.Equals(empId));
+            var employee = db.Employees.FirstOrDefault(x => x.EmployeeId.Equals(empId));
             var addRewardViewModel = new AddRewardViewModel
             {
                 EmployeeId = empId,
@@ -186,6 +187,48 @@ namespace EmployeeManager.Controllers
                 db.SaveChanges();
             }
             return Redirect("/manager");
+        }
+
+        public ActionResult Positions()
+        {
+            var positions = db.Positions
+            .Where(e => e.IsDeleted == false)
+            .ToList();
+
+            return View(positions);
+        }
+
+        public ActionResult CreatePosition()
+        {
+            var createRewardViewModel = new CreatePositionViewModel();
+            return View(createRewardViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult CreatePosition(CreatePositionViewModel data)
+        {
+            if (ModelState.IsValid)
+            {
+                var position = new Position()
+                {
+                    Title = data.Title,
+                    RewardRate = data.RewardRate,
+                    CreatedAt = DateTime.Now,
+                    EditedAt = DateTime.Now,
+                    IsDeleted = false
+                };
+                db.Positions.Add(position);
+                db.SaveChanges();
+                return Redirect("/manager/positions");
+            }
+            return Redirect("/manager/positions/createposition");
+        }
+
+        public ActionResult DeletePosition(int posId)
+        {
+            db.Positions.FirstOrDefault(x => x.PositionId.Equals(posId)).IsDeleted = true;
+            db.SaveChanges();
+            return Redirect("/manager/positions");
         }
     }
 }

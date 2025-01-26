@@ -29,6 +29,7 @@ namespace DataLayer.Models.ViewModels
         [DisplayName("Last Name")]
         public string LastName { get; set; }
         public DateTime HiringDate { get; set; }
+        [DisplayName("Position")]
         public int SelectedPosition { get; set; }
     }
 }

@@ -121,6 +121,8 @@
     <Content Include="Views\Manager\CreateEmployee.cshtml" />
     <Content Include="Views\Manager\EditEmployee.cshtml" />
     <Content Include="Views\Manager\AddReward.cshtml" />
+    <Content Include="Views\Manager\CreatePosition.cshtml" />
+    <Content Include="Views\Manager\Positions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
