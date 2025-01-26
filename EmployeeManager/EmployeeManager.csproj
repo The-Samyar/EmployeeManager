@@ -119,6 +119,8 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Employee\Home.cshtml" />
     <Content Include="Views\Manager\CreateEmployee.cshtml" />
+    <Content Include="Views\Manager\EditEmployee.cshtml" />
+    <Content Include="Views\Manager\AddReward.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

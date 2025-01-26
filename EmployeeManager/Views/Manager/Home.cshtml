@@ -50,29 +50,63 @@
                         <th scope="col" class="px-6 py-3">
                             Position
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Latest reward amount
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Latest reward date
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @{
-                        foreach (var employee in Model.Employees)
+                        foreach (var row in Model.EmployeesWithRewards)
                         {
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                                <td class="px-6 py-4">
-                                    @employee.User.FirstName @employee.User.LastName
-                                </td>
-                                <td class="px-6 py-4">
-                                    @employee.HiringDate
-                                </td>
-                                <td class="px-6 py-4">
-                                    @employee.Position.Title
-                                </td>
-                                <td class="px-6 py-4">
-                                    <a href="/manager/GiveReward/" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-yellow-300 border border-transparent rounded-md hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-200">Reward</a>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <a href="/manager/DeleteEmployee/@employee.EmployeeId" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete</a>
-                                </td>
-                            </tr>
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                            <td class="px-6 py-4">
+                                                @row.Employee.User.FirstName @row.Employee.User.LastName
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                @row.Employee.HiringDate
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                @row.Employee.Position.Title
+                                            </td>
+                                            @{
+                                                double amount = 0;
+                                                if (row.RewardHistory != null)
+                                                {
+                                                    amount = row.RewardHistory.Rate * row.RewardHistory.Count;
+                                                    <td class="px-6 py-4">
+                                                        @amount
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        @row.RewardHistory.CreatedAt
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="px-6 py-4">
+                                                        --
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        --
+                                                    </td>
+                                                }
+                                            }
+
+                                            <td class="px-6 py-4">
+                                                <a href="/manager/AddReward?empId=@row.Employee.EmployeeId" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-yellow-300 border border-transparent rounded-md hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-200">Reward</a>
+                                            </td>
+
+                                            <td class="px-6 py-4">
+                                                <a href="/manager/EditEmployee?empId=@row.Employee.EmployeeId" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-300 border border-transparent rounded-md hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-200">Edit</a>
+                                            </td>
+
+                                            <td class="px-6 py-4">
+                                                <a href="/manager/DeleteEmployee/@row.Employee.EmployeeId" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete</a>
+                                            </td>
+                                        </tr>
                         }
                     }
                 </tbody>

@@ -9,6 +9,13 @@ namespace DataLayer.Models.ViewModels
     public class ManagerHomeViewModel
     {
         public User Manager { get; set; }
-        public List<Employee> Employees { get; set; }
+        public List<EmployeeRewardViewModel> EmployeesWithRewards { get; set; }
     }
+
+    public class EmployeeRewardViewModel
+    {
+        public Employee Employee { get; set; }
+        public RewardHistory RewardHistory { get; set; }
+    }
+
 }

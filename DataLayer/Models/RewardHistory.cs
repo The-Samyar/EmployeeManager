@@ -15,6 +15,7 @@ namespace DataLayer.Models
         public int RewardHistoryId { get; set; }
         public int Count { get; set; }
         public double Rate { get; set; }
+        public string Message { get; set; }
 
         [ForeignKey(nameof(Employee))]
         public int EmployeeId { get; set; }

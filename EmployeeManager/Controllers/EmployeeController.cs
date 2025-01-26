@@ -16,7 +16,7 @@ namespace EmployeeManager.Controllers
         [Authorize]
         public ActionResult Home()
         {
-            var employee = db.Employees.Where(u => u.User.Username == User.Identity.Name).FirstOrDefault();
+            var employee = db.Employees.Where(u => u.User.Username == User.Identity.Name && u.IsDeleted == false).FirstOrDefault();
 
             if (employee == null)
             {
