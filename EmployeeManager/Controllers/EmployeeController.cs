@@ -28,7 +28,7 @@ namespace EmployeeManager.Controllers
                 return HttpNotFound();
             }
 
-            var rewards = db.RewardHistorys.Where(u => u.EmployeeId == employee.EmployeeId).ToList();
+            var rewards = db.RewardHistorys.Where(u => u.EmployeeId == employee.EmployeeId && u.IsDeleted == false).ToList();
             var data = new EmployeeHomeViewModel
             {
                 Employee = employee,

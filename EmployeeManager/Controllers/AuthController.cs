@@ -26,7 +26,7 @@ namespace EmployeeManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                var res = db.Users.Where(e => e.Username == LoginCredentials.Username && e.Password == LoginCredentials.Password).FirstOrDefault();
+                var res = db.Users.Where(e => e.Username == LoginCredentials.Username && e.Password == LoginCredentials.Password && e.IsDeleted == false).FirstOrDefault();
                 if (res != null)
                 {
                     FormsAuthentication.SetAuthCookie(LoginCredentials.Username, true);

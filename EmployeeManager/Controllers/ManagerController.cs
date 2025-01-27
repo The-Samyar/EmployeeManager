@@ -17,7 +17,7 @@ namespace EmployeeManager.Controllers
         [Authorize]
         public ActionResult Home()
         {
-            var manager = db.Users.Where(u => u.Username == User.Identity.Name).FirstOrDefault();
+            var manager = db.Users.Where(u => u.Username == User.Identity.Name && u.IsDeleted == false).FirstOrDefault();
             if (manager == null)
             {
                 return View(HttpNotFound());
@@ -34,7 +34,7 @@ namespace EmployeeManager.Controllers
             {
                 Employee = e,
                 RewardHistory = db.RewardHistorys
-                    .Where(r => r.EmployeeId == e.EmployeeId)
+                    .Where(r => r.EmployeeId == e.EmployeeId && r.IsDeleted == false)
                     .OrderByDescending(r => r.CreatedAt)
                     .FirstOrDefault()
             }).ToList();
@@ -51,7 +51,7 @@ namespace EmployeeManager.Controllers
         public ActionResult CreateEmployee()
         {
             var createEmployeeForm = new CreateEmployeeViewModel();
-            ViewBag.Positions = db.Positions.ToList();
+            ViewBag.Positions = db.Positions.Where(p => p.IsDeleted == false).ToList();
             return View(createEmployeeForm);
         }
 
@@ -90,7 +90,7 @@ namespace EmployeeManager.Controllers
 
         public ActionResult DeleteEmployee(int id)
         {
-            var employee = db.Employees.Where(e => e.EmployeeId == id).FirstOrDefault();
+            var employee = db.Employees.Where(e => e.EmployeeId == id && e.IsDeleted == false).FirstOrDefault();
             if (employee == null)
             {
                 return HttpNotFound();
@@ -111,7 +111,7 @@ namespace EmployeeManager.Controllers
             var emp = from a in db.Employees
                       join b in db.Users on a.UserId equals b.UserId
                       join c in db.Positions on a.PositionId equals c.PositionId
-                      where a.EmployeeId == empId
+                      where a.EmployeeId == empId && a.IsDeleted == false && b.IsDeleted == false && c.IsDeleted == false
                       select new EditEmployeeViewModel
                       {
                           EmployeeId = empId,
@@ -124,7 +124,7 @@ namespace EmployeeManager.Controllers
             var result = emp.FirstOrDefault();
             if (result != null)
             {
-                ViewBag.Positions = db.Positions.ToList();
+                ViewBag.Positions = db.Positions.Where(p => p.IsDeleted == false).ToList();
 
                 return View(result);
             }
@@ -137,7 +137,7 @@ namespace EmployeeManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                var employee = db.Employees.FirstOrDefault(x => x.EmployeeId.Equals(model.EmployeeId));
+                var employee = db.Employees.FirstOrDefault(x => x.EmployeeId.Equals(model.EmployeeId) && x.IsDeleted == false);
                 if (employee == null)
                 {
                     return View(model);
@@ -157,7 +157,7 @@ namespace EmployeeManager.Controllers
 
         public ActionResult AddReward(int empId)
         {
-            var employee = db.Employees.FirstOrDefault(x => x.EmployeeId.Equals(empId));
+            var employee = db.Employees.FirstOrDefault(x=>x.EmployeeId.Equals(empId) && x.IsDeleted == false);
             var addRewardViewModel = new AddRewardViewModel
             {
                 EmployeeId = empId,
