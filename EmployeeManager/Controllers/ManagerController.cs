@@ -20,12 +20,14 @@ namespace EmployeeManager.Controllers
             var manager = db.Users.Where(u => u.Username == User.Identity.Name && u.IsDeleted == false).FirstOrDefault();
             if (manager == null)
             {
-                return View(HttpNotFound());
+                ViewBag.ErrorMessage = "User not found";
+                return Redirect("/auth/login");
             }
 
             if (!manager.IsManager)
             {
-                return View(HttpNotFound());
+                ViewBag.ErrorMessage = "User is not authorized";
+                return Redirect("/auth/login");
             }
             var employees = db.Employees
             .Where(e => e.IsDeleted == false)

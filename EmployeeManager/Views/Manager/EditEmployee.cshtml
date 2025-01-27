@@ -37,7 +37,7 @@
 
 @using (Html.BeginForm("EditEmployee", "Manager", FormMethod.Post, new { @class = "max-w-sm mx-auto" }))
 {
-    <h2 class="inline-block mb-2 text-2xl font-bold text-gray-900 dark:text-white">Viraesh employee</h2>
+    <h2 class="inline-block mb-2 text-2xl font-bold text-gray-900 dark:text-white">Edit employee</h2>
     @Html.AntiForgeryToken()
 
     <input type="hidden" name="EmployeeId" value="@Model.EmployeeId" />

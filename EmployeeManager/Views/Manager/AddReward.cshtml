@@ -28,7 +28,7 @@
 
 @using (Html.BeginForm("AddReward", "Manager", FormMethod.Post, new { @class = "max-w-sm mx-auto" }))
 {
-    <h2 class="inline-block mb-2 text-2xl font-bold text-gray-900 dark:text-white">Create employee</h2>
+    <h2 class="inline-block mb-2 text-2xl font-bold text-gray-900 dark:text-white">Add reward</h2>
     @Html.AntiForgeryToken()
 
     <input type="hidden" name="EmployeeId" value="@Model.EmployeeId" />

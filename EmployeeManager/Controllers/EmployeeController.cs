@@ -20,12 +20,14 @@ namespace EmployeeManager.Controllers
 
             if (employee == null)
             {
-                return HttpNotFound();
+                ViewBag.ErrorMessage = "User not found";
+                return Redirect("/auth/login");
             }
 
             if (employee.User.IsManager)
             {
-                return HttpNotFound();
+                ViewBag.ErrorMessage = "User is not authorized";
+                return Redirect("/auth/login");
             }
 
             var rewards = db.RewardHistorys.Where(u => u.EmployeeId == employee.EmployeeId && u.IsDeleted == false).ToList();

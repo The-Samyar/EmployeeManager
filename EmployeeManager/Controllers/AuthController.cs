@@ -39,14 +39,25 @@ namespace EmployeeManager.Controllers
                         return RedirectToRoute("Employee");
                     }
                 }
+                else
+                {
+                    ViewBag.ErrorMessage = "User with the following credentials does not exist";
+                }
+            } 
+            else
+            {
+                ViewBag.ErrorMessage = "Some error occured";
             }
-            return HttpNotFound();
+            return View(LoginCredentials);
         }
 
         [Authorize]
         public ActionResult Signout()
         {   
             FormsAuthentication.SignOut();
+
+            ViewBag.ErrorMessage = "Some error occured";
+
             return RedirectToAction("Login");
         }
 
