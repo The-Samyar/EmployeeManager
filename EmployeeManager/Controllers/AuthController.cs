@@ -24,31 +24,30 @@ namespace EmployeeManager.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel LoginCredentials)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var res = db.Users.Where(e => e.Username == LoginCredentials.Username && e.Password == LoginCredentials.Password && e.IsDeleted == false).FirstOrDefault();
-                if (res != null)
-                {
-                    FormsAuthentication.SetAuthCookie(LoginCredentials.Username, true);
-                    if (res.IsManager)
-                    {
-                        return RedirectToRoute("Manager");
-                    }
-                    else
-                    {
-                        return RedirectToRoute("Employee");
-                    }
-                }
-                else
-                {
-                    ViewBag.ErrorMessage = "User with the following credentials does not exist";
-                }
-            } 
+                ViewBag.ErrorMessage = "Input fields are not valid";
+                return View(LoginCredentials);
+
+            }
+
+            var res = db.Users.Where(e => e.Username == LoginCredentials.Username && e.Password == LoginCredentials.Password && e.IsDeleted == false).FirstOrDefault();
+            if (res == null)
+            {
+                ViewBag.ErrorMessage = "User with the following credentials does not exist";
+                return View(LoginCredentials);
+
+            }
+
+            FormsAuthentication.SetAuthCookie(LoginCredentials.Username, true);
+            if (res.IsManager)
+            {
+                return RedirectToRoute("Manager");
+            }
             else
             {
-                ViewBag.ErrorMessage = "Some error occured";
+                return RedirectToRoute("Employee");
             }
-            return View(LoginCredentials);
         }
 
         [Authorize]

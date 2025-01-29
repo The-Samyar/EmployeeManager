@@ -69,22 +69,16 @@ namespace EmployeeManager.Controllers
                     FirstName = data.FirstName,
                     LastName = data.LastName,
                     IsManager = false,
-                    CreatedAt = DateTime.Now,
-                    EditedAt = DateTime.Now,
-                    IsDeleted = false
                 };
                 var employee = new Employee()
                 {
                     User = employeeUser,
                     PositionId = data.SelectedPosition,
                     HiringDate = data.HiringDate,
-                    CreatedAt = DateTime.Now,
-                    EditedAt = DateTime.Now,
-                    IsDeleted = false
                 };
 
                 db.Users.Add(employeeUser);
-                db.Employees.Add(employee);
+                db.Employees.Add(employee); 
                 db.SaveChanges();
             }
             return Redirect("/manager");
@@ -180,9 +174,6 @@ namespace EmployeeManager.Controllers
                     Count = addRewardViewModel.Count,
                     Rate = addRewardViewModel.RewardRate,
                     Message = addRewardViewModel.Message,
-                    CreatedAt = DateTime.Now,
-                    EditedAt = DateTime.Now,
-                    IsDeleted = false
                 };
 
                 db.RewardHistorys.Add(rewardHistory);
@@ -215,9 +206,6 @@ namespace EmployeeManager.Controllers
                 {
                     Title = data.Title,
                     RewardRate = data.RewardRate,
-                    CreatedAt = DateTime.Now,
-                    EditedAt = DateTime.Now,
-                    IsDeleted = false
                 };
                 db.Positions.Add(position);
                 db.SaveChanges();
